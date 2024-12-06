@@ -1,0 +1,6 @@
+[core]
+    remote = myremote
+['remote "myremote"']
+    url = gdrive://1pAAvDXBybNKtMN6UYacCP0Sul2YkC81I
+    gdrive_use_service_account = true
+    gdrive_service_account_json_file_path = "C:\Users\HP\Downloads\dvc-folder-6f618604f1eb.json"
