@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import mlflow
+import joblib
 
 def preprocess_data():
     # Load raw data from CSV
@@ -31,6 +32,9 @@ def preprocess_data():
             
             # Log processed data artifact
             mlflow.log_artifact(processed_data_path)
+
+            # Save the scaler after fitting on the training data
+            joblib.dump(scaler, 'models/scaler.pkl')
 
             print("Preprocessed data saved and logged to MLflow.")
     
