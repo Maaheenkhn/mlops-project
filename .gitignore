@@ -1,1 +1,9 @@
 workflows/mlflow/mlruns/
+# Ignore Airflow logs
+airflow/logs/
+
+# Ignore environment files
+airflow/.env
+
+# Ignore other temporary files
+*.log
