@@ -5,8 +5,6 @@ on:
     branches:
       - prod
 
-# Trying to edit 
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -29,7 +27,7 @@ jobs:
     - name: Pull Docker Image
       run: |
         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        docker pull $DOCKER_USERNAME/weather-app:latest
+        docker pull $DOCKER_USERNAME/weather-app:testing
 
     - name: Set Up Kubectl
       run: |
