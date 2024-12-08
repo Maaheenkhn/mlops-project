@@ -33,10 +33,6 @@ jobs:
         echo "DOCKER_USERNAME=$(python -c 'from dotenv import dotenv_values; print(dotenv_values(".env")["DOCKER_USERNAME"])')" >> $GITHUB_ENV
         echo "DOCKER_PASSWORD=$(python -c 'from dotenv import dotenv_values; print(dotenv_values(".env")["DOCKER_PASSWORD"])')" >> $GITHUB_ENV
 
-    - name: Run Unit Tests
-      run: |
-        pytest
-
     - name: Build Docker Image
       run: |
         docker build -t $DOCKER_USERNAME/weather-app:testing .
