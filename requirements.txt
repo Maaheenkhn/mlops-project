@@ -1,7 +1,8 @@
 dvc
 dvc_gdrive
 mlflow
-scikit-learn
+scikit-learn==1.5.2
+numpy==1.22.0
 flask 
 pandas
 joblib
