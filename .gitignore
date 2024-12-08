@@ -1,5 +1,6 @@
 workflows/mlflow/mlruns/
 .env
+
 # Ignore Airflow logs
 airflow/logs/
 
