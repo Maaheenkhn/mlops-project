@@ -1,0 +1,47 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - testing
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Install dotenv
+      run: |
+        pip install python-dotenv
+
+    - name: Load Docker Credentials from .env
+      id: load-env
+      run: |
+        python -c "from dotenv import load_dotenv; load_dotenv();"
+        echo "DOCKER_USERNAME=$(python -c 'from dotenv import dotenv_values; print(dotenv_values(".env")["DOCKER_USERNAME"])')" >> $GITHUB_ENV
+        echo "DOCKER_PASSWORD=$(python -c 'from dotenv import dotenv_values; print(dotenv_values(".env")["DOCKER_PASSWORD"])')" >> $GITHUB_ENV
+
+    - name: Run Unit Tests
+      run: |
+        pytest
+
+    - name: Build Docker Image
+      run: |
+        docker build -t $DOCKER_USERNAME/weather-app:testing .
+
+    - name: Push to DockerHub
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker push $DOCKER_USERNAME/weather-app:testing
