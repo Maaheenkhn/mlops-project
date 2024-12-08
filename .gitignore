@@ -10,3 +10,4 @@ airflow/.env
 
 # Ignore other temporary files
 *.log
+
