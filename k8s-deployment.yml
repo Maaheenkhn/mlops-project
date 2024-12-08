@@ -14,9 +14,10 @@ spec:
     spec:
       containers:
       - name: weather-app
-        image: $DOCKER_USERNAME/weather-app:latest
+        image: $DOCKER_USERNAME/weather-app:testing
         ports:
         - containerPort: 80
+
 
 ---
 apiVersion: v1
