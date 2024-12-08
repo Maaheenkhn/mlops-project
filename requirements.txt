@@ -1,0 +1,8 @@
+dvc
+dvc_gdrive
+mlflow
+scikit-learn
+flask 
+pandas
+joblib
+pickle
