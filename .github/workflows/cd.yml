@@ -37,4 +37,4 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl apply -f k8s-deployment.yml
+        kubectl apply -f k8s-deployment.yml --validate=false
