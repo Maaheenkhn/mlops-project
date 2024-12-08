@@ -1,0 +1,98 @@
+/* Apply Google Font (Open Sans) */
+body {
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  /* Global Box-sizing for all elements */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box; /* Ensures padding and border are included in width */
+  }
+  
+  /* Container */
+  .container {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  
+  /* Form Box */
+  .form-box {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #f7fafc;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form Title (Bold Heading) */
+  .form-title {
+    font-size: 1.5rem;
+    font-weight: 700;  /* Bold weight for the heading */
+    color: #2d3748;
+    margin-bottom: 1rem;
+  }
+  
+  /* Input Group */
+  .input-group {
+    margin-bottom: 1rem;
+  }
+  
+  /* Label */
+  label {
+    font-size: 1rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-weight: 400;
+  }
+  
+  /* Input Fields */
+  .input-field {
+    width: 100%;  /* Ensures inputs take full width of their container */
+    padding: 0.75rem;
+    background-color: #e2e8f0;
+    border-radius: 0.375rem;
+    border: 1px solid #cbd5e0;
+    font-size: 1rem;
+    color: #2d3748;
+    font-family: 'Open Sans', sans-serif;
+    transition: background-color 0.3s, border 0.3s;
+    margin-bottom: 1rem;  /* Add space below each input */
+  }
+  
+  /* Input Fields Focus Effect */
+  .input-field:focus {
+    outline: none;
+    border-color: #ecc94b;
+    background-color: #edf2f7;
+    box-shadow: 0 0 0 1px #ecc94b;
+  }
+  
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;  /* Ensures the button takes the full width of its container */
+    padding: 0.75rem;
+    background-color: #ecc94b;
+    color: #2d3748;
+    font-weight: 400;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  /* Submit Button Hover Effect */
+  .submit-btn:hover {
+    background-color: #d69e2e;
+    transform: translateY(-2px);
+  }
+  
+  .submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 204, 51, 0.6);
+  }
+  
