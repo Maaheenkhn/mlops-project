@@ -1,0 +1,40 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Install dotenv
+      run: |
+        pip install python-dotenv
+
+    - name: Load Docker Credentials from .env
+      id: load-env
+      run: |
+        python -c "from dotenv import load_dotenv; load_dotenv();"
+        echo "DOCKER_USERNAME=$(python -c 'from dotenv import dotenv_values; print(dotenv_values(".env")["DOCKER_USERNAME"])')" >> $GITHUB_ENV
+        echo "DOCKER_PASSWORD=$(python -c 'from dotenv import dotenv_values; print(dotenv_values(".env")["DOCKER_PASSWORD"])')" >> $GITHUB_ENV
+
+    - name: Pull Docker Image
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker pull $DOCKER_USERNAME/weather-app:latest
+
+    - name: Set Up Kubectl
+      run: |
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f k8s-deployment.yaml
