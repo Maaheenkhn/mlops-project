@@ -13,11 +13,11 @@ app = Flask(
 )
 
 # Load the trained model
-with open(r'..\mlops-project\models\trained_classifier.pkl', 'rb') as file:
+with open(r'./models/trained_classifier.pkl', 'rb') as file:
     model = pickle.load(file)
 
 # Load the scaler (pre-trained during model training)
-scaler = joblib.load(r'..\mlops-project\models\scaler.pkl')  # Load the scaler saved during training
+scaler = joblib.load(r'./models/scaler.pkl')  # Load the scaler saved during training
 
 # Weather condition mapping from your model training
 weather_condition_map = {
