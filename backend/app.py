@@ -6,14 +6,18 @@ import mlflow
 from sklearn.ensemble import RandomForestClassifier
 import joblib  # For loading the scaler
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder='../frontend/templates',  # Path to HTML files
+    static_folder='../frontend/static'        # Path to static files
+)
 
 # Load the trained model
-with open(r'C:\Users\areej\OneDrive\Desktop\mlops-project\models\trained_classifier.pkl', 'rb') as file:
+with open(r'..\mlops-project\models\trained_classifier.pkl', 'rb') as file:
     model = pickle.load(file)
 
 # Load the scaler (pre-trained during model training)
-scaler = joblib.load(r'C:\Users\areej\OneDrive\Desktop\mlops-project\models\scaler.pkl')  # Load the scaler saved during training
+scaler = joblib.load(r'..\mlops-project\models\scaler.pkl')  # Load the scaler saved during training
 
 # Weather condition mapping from your model training
 weather_condition_map = {

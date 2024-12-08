@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Prediction App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <!-- Check if the prediction is available -->
+            <div id="prediction-section" style="display:none;">
+                <h2 class="form-title">Weather Prediction</h2>
+                <p id="prediction-result" class="prediction-result"></p>
+                <button id="again-btn" class="submit-btn">Get Another Prediction</button>
+            </div>
+
+            <!-- Form Section -->
+            <div id="form-section">
+                <h2 class="form-title">Weather Data Form</h2>
+                <form id="weather-form">
+                    <!-- Temperature Input -->
+                    <div class="input-group">
+                        <label for="temperature">Temperature (°C)</label>
+                        <input type="number" class="input-field" step="any" placeholder="Enter temperature" name="temperature" id="temperature">
+                    </div>
+
+                    <!-- Humidity Input -->
+                    <div class="input-group">
+                        <label for="humidity">Humidity (%)</label>
+                        <input type="number" class="input-field" step="any" placeholder="Enter humidity" name="humidity" id="humidity">
+                    </div>
+
+                    <!-- Wind Speed Input -->
+                    <div class="input-group">
+                        <label for="wind-speed">Wind Speed (m/s)</label>
+                        <input type="number" class="input-field" step="any" placeholder="Enter wind speed" name="wind-speed" id="wind-speed">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle the form submission via AJAX
+        $('#weather-form').submit(function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            var formData = {
+                temperature: $('#temperature').val(),
+                humidity: $('#humidity').val(),
+                wind_speed: $('#wind-speed').val()
+            };
+
+            // Make AJAX request to submit the form
+            $.ajax({
+                url: '/predict',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Show prediction and hide the form
+                    $('#form-section').hide();
+                    $('#prediction-result').text(response.prediction);
+                    $('#prediction-section').show();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response (e.g., missing input or server error)
+                    var errorMsg = xhr.responseJSON.error || "Something went wrong!";
+                    alert(errorMsg);
+                }
+            });
+        });
+
+        // Handle the "Again" button click
+        $('#again-btn').click(function() {
+            // Reset form and show the form again
+            $('#weather-form')[0].reset();
+            $('#prediction-section').hide();
+            $('#form-section').show();
+        });
+    </script>
+</body>
+</html>
